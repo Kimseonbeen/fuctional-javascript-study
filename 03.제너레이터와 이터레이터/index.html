@@ -1,0 +1,55 @@
+<script>const log = console.log;</script>
+
+<!-- 정리-->
+<!-- 
+    순회가능한 자료구조 즉 이터레이터를 가지고있는 것을 이터러블이라하고 
+    그 이터러블이 리턴하는것은 이터레이터 이고 이터레이터는 next 함수를 가지고있고 
+    넥스트함수 가 리턴하는것은 순회중인 값과 순회완료여부를 반환합니다 이것을 이터레이션프로토콜 이라고합니다 
+-->
+
+
+<!-- 제너레이터 / 이터레이터 -->
+<!-- 제너레이터 : 이터레이터이자 이터러블을 생성하는 함수 -->
+<!-- 제너레이터는 이터레이터를 리턴 하는 함수 이다-->
+<!-- 제너레이터는 문장을 값으로 만들 수 있고, 문장을 통해서 순회할수 있는 값을 만들 수있다.-->
+<script>
+    function *gen() {
+        yield 7;
+        if (false) yield 2;
+        yield 3;
+        return 100;
+    }
+    let iter = gen();
+    // 제너레이터는 well-formed-iterator 리턴하는 함수
+    //log(iter[Symbol.iterator]() == iter)
+
+    //log(iter.next());
+    //log(iter.next());
+    //log(iter.next());
+    //log(iter.next());
+
+    // 순회 할때 리턴 값은 없이 순회가 이루어짐
+    // for(const a of gen()) log(a);
+</script>
+
+<!-- odds -->
+
+<script>
+    function *odds(l) {
+        for (let i = 0; i < l; i++) {
+            if(i % 2) yield i;
+        }
+    }
+    let iter2 = odds(10);
+    log(iter2.next());
+    log(iter2.next());
+    log(iter2.next());
+    log(iter2.next());
+    log(iter2.next());
+</script>
+
+<!-- for of, 전개 연산자, 구조 분해, 나머지 연산자 -->
+
+<script>
+
+</script>
