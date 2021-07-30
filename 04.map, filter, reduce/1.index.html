@@ -1,0 +1,82 @@
+<script>const log = console.log;</script>
+
+<script>
+    const products = [
+        { name : '반팔티', price: 15000},
+        { name : '긴팔티', price: 20000},
+        { name : '핸드폰케이스', price: 15000},
+        { name : '후드티', price: 30000},
+        { name : '바지', price: 25000},
+
+    ];
+</script>
+
+<!-- map -->
+
+<script>
+
+    const map = (f, iter) => {
+         log("f :", f);
+         log("f :", typeof f);   // 함수를 넣었당
+         log("iter :", iter);
+        let res = [];
+        for (const a of iter) {
+            log("a : ",a)   // 
+            log("a : ",typeof a)   // object
+            log("res : ", res)
+        res.push(f(a)); // 함수 실행 object의 .name 추출 하여 push
+      }
+        return res;
+    };
+    
+
+    let names = [];
+    for (const p of products) {
+        names.push(p.name);
+    }
+    log(names);
+
+    log(map(p => p.name, products));
+
+    let prices = [];
+    for (const p of products) {
+        prices.push(p.price);
+    }
+    log(prices);
+    log("map : ", map(p => p.price, products));
+    console.clear();
+</script>
+
+<!-- 이터러블 프로토콜을 따른 map의 다형성 -->
+
+<script>
+    // log([1,2,3].map(a => a + 1));
+    // (document.querySelectorAll는 array를 상속 받은 것이 아니기 때문에, map함수가 프로토타입에 구현되어 있지 않다.
+    //log(document.querySelectorAll('*')).map(el => el.nodeName);
+
+    // 내가 구현한 map 함수는 동작
+    // document.querySelectorAll가 이터러블 프로토콜을 따르고 있기 때문
+    // log(map(el => el.nodeName, document.querySelectorAll('*')));
+
+    // const it = document.querySelectorAll('*')[Symbol.iterator]();
+    // log(it);
+
+    function *gen() {
+        yield 2;
+        if(false) yield 3;
+        yield 4;
+    }
+    //log(map(a => a * a, gen()));
+
+    let m = new Map();
+    m.set('a', 10);
+    m.set('b', 20);
+    log("m : ", m)
+    const it = m[Symbol.iterator]();
+    log(new Map(map(([k, a]) => [k, a * 2], m)));
+</script>
+
+<!-- filter -->
+
+<script>
+</script>

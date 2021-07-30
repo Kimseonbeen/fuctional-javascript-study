@@ -35,9 +35,19 @@
 <!-- odds -->
 
 <script>
+    function *infinity(i = 0) {
+        while (true) yield i++;
+    }
+    function *limit(l, iter) {
+        for (const a of iter) {
+            yield a;
+            if (a == l) return;
+        }
+    }
     function *odds(l) {
-        for (let i = 0; i < l; i++) {
-            if(i % 2) yield i;
+        for (const a of limit(l, infinity(1))) {
+            if (a % 2) yield a;
+            if (a == l) return;
         }
     }
     let iter2 = odds(10);
@@ -46,10 +56,23 @@
     log(iter2.next());
     log(iter2.next());
     log(iter2.next());
+    log(iter2.next());
+
+    for (const a of odds(40)) log(a);
+
+    console.clear();
 </script>
 
 <!-- for of, 전개 연산자, 구조 분해, 나머지 연산자 -->
 
 <script>
-
+    // 전개 연산자
+    log(...odds(10));
+    log(...odds(10), ...odds(20));
+    log([...odds(10), ...odds(20)]);
+    // 구조 분해
+    const [head, second, ...tail] = odds(5);
+    log(head);
+    log(second);
+    log(tail);
 </script>
